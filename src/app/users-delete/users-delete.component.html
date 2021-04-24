@@ -1,0 +1,21 @@
+ <!-- Modal -->
+ <div class="modal-header">
+   <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dismiss()">
+     <i class="fas fa-times"></i>
+   </button>
+ </div>
+ <br class="modal-body">
+ Do you really want to delete this user {{ user.name }} ? <br>
+ id: {{user.id}}<br>
+ name: {{user.name}}<br>
+ natID: {{user.natID}}<br>
+
+ <div class="modal-footer">
+   <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+     (click)="dismiss()">No</button>
+   
+   <button type="button" class="btn btn-success" (click)="confirm()">
+     Yes !
+   </button>
+ </div>

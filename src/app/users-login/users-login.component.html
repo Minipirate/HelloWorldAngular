@@ -1,0 +1,16 @@
+<div class="container mt-6">
+    <div class="row"></div>
+    <div class="col"></div>
+    <div class="col-6">
+        <form (ngSubmit)="login(form)" #form="ngForm">
+            <div class="form-group">
+                <label for="exampleInputEmail">Email Address</label>
+                <input ngModel #email="ngModel" required ngModel name="email" required type="email" class="form-control"
+                [ngClass]="{'is-invalid' : form.submitted && email.errors?.required}" placeholder="Email" />
+                <small class="form-text text-muted">Well never share your email with anyone else !</small>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col"></div>
+    </div>
