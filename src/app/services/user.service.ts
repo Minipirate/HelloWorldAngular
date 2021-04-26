@@ -19,7 +19,7 @@ export class UserService {
     return this.http.post(this.url, user)
   }
 
-  findByEmail(email: string){
+  findByEmail(email: any){
     return this.http.get<User[]>(this.url + '?email=' + email)
   }
 

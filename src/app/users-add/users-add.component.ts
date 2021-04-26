@@ -4,11 +4,11 @@ import {  UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-
+//Quand la classe est avec un @Component décorateur, il traite la classe comme Component
 @Component({
-  selector: 'app-users-add',
-  templateUrl: './users-add.component.html',
-  styleUrls: ['./users-add.component.css']
+  selector: 'app-users-add', //Angular place la vue à l'intérieur du sélecteur app-users-add
+  templateUrl: './users-add.component.html', // Le modèle html qui définit notre vue
+  styleUrls: ['./users-add.component.css'] //les styles CSS dont le composant a besoin
 })
 export class UsersAddComponent implements OnInit {
 

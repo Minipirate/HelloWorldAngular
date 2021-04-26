@@ -1,36 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../services/user.service';
 
+//Quand la classe est avec un @Component décorateur, il traite la classe comme Component
 @Component({
-  selector: 'app-users-login',
-  templateUrl: './users-login.component.html',
-  styleUrls: ['./users-login.component.css']
+  selector: 'app-users-login', //Angular place la vue à l'intérieur du sélecteur app-login
+  templateUrl: './users-login.component.html', //Le modèle html qui définit notre vue
+  styleUrls: ['./users-login.component.css'] //les styles CSS dont le composant a besoin
 })
 export class UsersLoginComponent implements OnInit {
   service: any;
   user: any;
 
-  constructor() { }
+  constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
-   //Méthode qui sert à initialiser des champs en récupérant des données de bdd
   ngOnInit(): void {
   }
 
-  login(form: NgForm) {
-    console.log('form', form.value);
+  showSuccess(email: string) {
+    this.toastr.success('Connection succeed', 'You are now connected ' + email)
+  }
 
-    if (form.valid) {
-      this.service.findByEmail(form.value).subscribe((res: any) => {
-        console.log(res);
-        this.user = res
-        console.log(this.user);
-        if (res.length === 0) {
-          console.log("error");
-        }
-        if (res.length > 0) {
-          console.log("email okay");
-        }
-      })
-    }
+  showError(email: string) {
+    this.toastr.error('Error', 'No user for the input given : ' + email)
+  }
+
+  login(form: NgForm) {
+    this.userService.findByEmail(form.value.email).subscribe(res => {
+      if (res.length === 0) {
+        this.showError(form.value.email)
+      } else if (res.length > 0) {
+        this.showSuccess(form.value.email)
+        localStorage.setItem('token', res[0].email);
+
+        setTimeout(() => {
+          this.router.navigate(['user-list'])
+        }, 700)
+      }
+    })
   }
 }

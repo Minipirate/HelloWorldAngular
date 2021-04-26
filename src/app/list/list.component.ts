@@ -5,11 +5,11 @@ import * as _ from 'underscore'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersDeleteComponent } from '../users-delete/users-delete.component';
 
-
+//Quand la classe est avec un @Component décorateur, il traite la classe comme Component
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-list',//Angular place la vue à l'intérieur du sélecteur app-list
+  templateUrl: './list.component.html', //le modèle html qui définit notre vue
+  styleUrls: ['./list.component.css']//les styles CSS dont le composant a besoin
 })
 export class ListComponent implements OnInit {
 
@@ -31,6 +31,7 @@ export class ListComponent implements OnInit {
     this.populateUsers()
   }
 
+  //Méthode qui sert à comptabiliser les users/pagination
   populateUsers() {
     this.service.get(this.pagination.currentPage, this.pagination.itemsPage, _.values(this.query).join('')).subscribe(
       (response: any) => {
@@ -42,6 +43,7 @@ export class ListComponent implements OnInit {
     );
   }
 
+  //Méthode qui sert à 
   paginate(page: number) {
     this.pagination.currentPage = page
     this.populateUsers()
